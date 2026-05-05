@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_blocks_stats",
+  "info": {
+    "displayName": "Stats",
+    "icon": "chart-bar",
+    "description": "Section heading with a row of animated statistics"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 80
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.stat-item",
+      "required": true,
+      "min": 1,
+      "max": 6
+    }
+  }
+}

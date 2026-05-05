@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_navigation_submenu_items",
+  "info": {
+    "displayName": "Submenu Item",
+    "icon": "chevron-right",
+    "description": "Child entry inside a dropdown menu"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "regex": "^\\/.*"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

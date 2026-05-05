@@ -1,0 +1,58 @@
+{
+  "collectionName": "components_blocks_info_card",
+  "info": {
+    "displayName": "Info Card",
+    "icon": "address-card",
+    "description": "Vertical card with media at the top and tagline + title + body + top-bordered CTA below. Used as a top-level block and as a carousel slide."
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 400
+    },
+    "media": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "framed": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "imageCover": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "align": {
+      "type": "enumeration",
+      "enum": ["left", "center", "right"],
+      "default": "left",
+      "required": true
+    }
+  }
+}

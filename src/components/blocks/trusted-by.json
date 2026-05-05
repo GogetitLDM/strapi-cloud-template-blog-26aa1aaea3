@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_trusted_by",
+  "info": {
+    "displayName": "Trusted By",
+    "icon": "shield-check",
+    "description": "Heading with gradient highlight and an autoplay marquee of partner logos"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 80
+    },
+    "logos": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

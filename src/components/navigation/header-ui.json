@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_navigation_header_ui",
+  "info": {
+    "displayName": "Header UI Strings",
+    "icon": "message",
+    "description": "Localizable UI strings for the site header"
+  },
+  "options": {},
+  "attributes": {
+    "searchPlaceholder": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "searchLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "menuLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "closeLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    }
+  }
+}

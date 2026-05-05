@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": {
+    "singularName": "page",
+    "pluralName": "pages",
+    "displayName": "Page",
+    "description": "Dynamic pages built with reusable blocks"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 255,
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "maxLength": 500
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "components": [
+        "blocks.hero-banner",
+        "blocks.image-card",
+        "blocks.framed-card",
+        "blocks.info-card",
+        "blocks.trusted-by",
+        "blocks.carousel",
+        "blocks.stats",
+        "blocks.entry-list",
+        "blocks.feature-banner",
+        "blocks.feature-list",
+        "blocks.intro-section",
+        "blocks.split-carousel"
+      ]
+    }
+  }
+}

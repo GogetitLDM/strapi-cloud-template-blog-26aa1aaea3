@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_navigation_link_items",
+  "info": {
+    "displayName": "Link Item",
+    "icon": "link",
+    "description": "Single navigation link with label and href"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "regex": "^\\/.*"
+    }
+  }
+}

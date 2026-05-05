@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_blocks_feature_banner",
+  "info": {
+    "displayName": "Feature Banner",
+    "icon": "rectangle-list",
+    "description": "Side-by-side promo: heading, body, CTA next to a media (image or video). Supports image-left/right and an optional framed style."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 600
+    },
+    "media": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "imagePosition": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "right",
+      "required": true
+    },
+    "framed": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  }
+}

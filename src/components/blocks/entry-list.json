@@ -1,0 +1,50 @@
+{
+  "collectionName": "components_blocks_entry_list",
+  "info": {
+    "displayName": "Entry List",
+    "icon": "list",
+    "description": "Section with tagline + heading + optional CTA, rendering a list of linkable image rows"
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 80
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "linkLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60,
+      "default": "Leer más"
+    },
+    "entries": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.entry",
+      "required": true,
+      "min": 1,
+      "max": 12
+    }
+  }
+}

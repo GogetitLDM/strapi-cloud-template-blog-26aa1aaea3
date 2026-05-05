@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_blocks_media",
+  "info": {
+    "displayName": "Media",
+    "icon": "picture",
+    "description": "Image (required) plus an optional autoplay loop video"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["videos"]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_blocks_hero_banner",
+  "info": {
+    "displayName": "Hero Banner",
+    "icon": "rocket",
+    "description": "Full-bleed hero with animated title, body copy, CTA, and per-breakpoint background"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "animatedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 80
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 600
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500,
+      "regex": "^\\/.*"
+    },
+    "desktopBackground": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "mobileBackground": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    }
+  }
+}

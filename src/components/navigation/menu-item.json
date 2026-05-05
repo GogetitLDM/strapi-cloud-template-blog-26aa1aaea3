@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_navigation_menu_items",
+  "info": {
+    "displayName": "Menu Item",
+    "icon": "bars",
+    "description": "Dropdown menu item with submenu entries"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "submenuItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.submenu-item",
+      "required": true,
+      "min": 1,
+      "max": 12
+    }
+  }
+}

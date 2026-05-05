@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_blocks_timeline",
+  "info": {
+    "displayName": "Timeline",
+    "icon": "clock",
+    "description": "Single timeline row: date label, heading and body on one side, dot-grid noise on the other. Repeat inside intro-section to build a stacked timeline."
+  },
+  "options": {},
+  "attributes": {
+    "date": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30
+    },
+    "heading": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 400
+    },
+    "side": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "left",
+      "required": true
+    },
+    "image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": false
+    }
+  }
+}

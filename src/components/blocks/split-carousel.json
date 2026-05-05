@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_split_carousel",
+  "info": {
+    "displayName": "Split Carousel",
+    "icon": "images",
+    "description": "Bordered split row carousel: text + paginator on the left, image on the right. Used standalone or inside intro-section."
+  },
+  "options": {},
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.split-carousel-slide",
+      "required": true,
+      "min": 1,
+      "max": 9
+    }
+  }
+}

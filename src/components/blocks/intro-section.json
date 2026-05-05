@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_blocks_intro_section",
+  "info": {
+    "displayName": "Intro Section",
+    "icon": "feather",
+    "description": "Centered section with tagline, heading, body and a polymorphic interactive child slot"
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 200
+    },
+    "body": {
+      "type": "text",
+      "required": false,
+      "maxLength": 600
+    },
+    "children": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.cta-button",
+        "blocks.split-carousel",
+        "blocks.timeline"
+      ],
+      "required": false,
+      "min": 0,
+      "max": 12
+    }
+  }
+}

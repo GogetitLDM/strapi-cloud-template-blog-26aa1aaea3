@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_footer_footer_ui",
+  "info": {
+    "displayName": "Footer UI Strings",
+    "icon": "message",
+    "description": "Localizable UI strings rendered in the site footer"
+  },
+  "options": {},
+  "attributes": {
+    "newsletterHeading": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "emailPlaceholder": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "subscribeLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "disclaimer": {
+      "type": "string",
+      "required": true,
+      "maxLength": 240
+    },
+    "copyright": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    }
+  }
+}

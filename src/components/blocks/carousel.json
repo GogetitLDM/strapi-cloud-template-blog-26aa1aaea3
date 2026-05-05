@@ -1,0 +1,72 @@
+{
+  "collectionName": "components_blocks_carousel",
+  "info": {
+    "displayName": "Carousel",
+    "icon": "layer-group",
+    "description": "Section with optional tagline, heading, body and an autoplay carousel of polymorphic slides (image cards, framed cards, etc.)"
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 80
+    },
+    "body": {
+      "type": "text",
+      "required": false,
+      "maxLength": 400
+    },
+    "slidesPerView": {
+      "type": "decimal",
+      "required": false
+    },
+    "slideGap": {
+      "type": "integer",
+      "required": false,
+      "min": 0,
+      "max": 80
+    },
+    "edgePadding": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "dynamicBackground": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    },
+    "showArrowsDesktop": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "showArrowsMobile": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "slides": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.image-card",
+        "blocks.framed-card",
+        "blocks.info-card"
+      ],
+      "required": true,
+      "min": 1,
+      "max": 9
+    }
+  }
+}

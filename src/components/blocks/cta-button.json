@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_cta_button",
+  "info": {
+    "displayName": "CTA Button",
+    "icon": "arrow-right",
+    "description": "Top-bordered link button with label and arrow icon"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500
+    }
+  }
+}

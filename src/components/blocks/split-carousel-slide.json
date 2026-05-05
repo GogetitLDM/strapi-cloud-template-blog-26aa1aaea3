@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_split_carousel_slide",
+  "info": {
+    "displayName": "Split Carousel Slide",
+    "icon": "image",
+    "description": "Single slide for split-carousel: title, body and image"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 240
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_footer_social_links",
+  "info": {
+    "displayName": "Footer Social Link",
+    "icon": "thumb-up",
+    "description": "External social-media link rendered as an icon button"
+  },
+  "options": {},
+  "attributes": {
+    "platform": {
+      "type": "enumeration",
+      "enum": ["linkedin"],
+      "required": true,
+      "default": "linkedin"
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "regex": "^https?:\\/\\/.+"
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_blocks_framed_card",
+  "info": {
+    "displayName": "Framed Card",
+    "icon": "id-card",
+    "description": "Bordered split card with square media, title, body and top-bordered CTA. Used as a top-level block and as a carousel slide."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 600
+    },
+    "media": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "imagePosition": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "left",
+      "required": true
+    }
+  }
+}

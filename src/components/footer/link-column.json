@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_footer_link_columns",
+  "info": {
+    "displayName": "Footer Link Column",
+    "icon": "list",
+    "description": "Column of footer links with optional heading and arrow indicators"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "navigation.link-item",
+      "required": true,
+      "min": 1,
+      "max": 20
+    }
+  }
+}

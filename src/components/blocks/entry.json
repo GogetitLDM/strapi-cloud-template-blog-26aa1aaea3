@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_blocks_entry",
+  "info": {
+    "displayName": "Entry",
+    "icon": "newspaper",
+    "description": "Linkable row with image, tag, title — works for blog posts, articles, options, etc."
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500
+    }
+  }
+}

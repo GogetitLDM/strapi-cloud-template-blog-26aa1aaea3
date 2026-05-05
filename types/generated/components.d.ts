@@ -1,75 +1,804 @@
-import type { Struct, Schema } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SharedSlider extends Struct.ComponentSchema {
-  collectionName: 'components_shared_sliders';
+export interface BlocksCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_carousel';
   info: {
-    displayName: 'Slider';
-    icon: 'address-book';
-    description: '';
+    description: 'Section with optional tagline, heading, body and an autoplay carousel of polymorphic slides (image cards, framed cards, etc.)';
+    displayName: 'Carousel';
+    icon: 'layer-group';
   };
   attributes: {
-    files: Schema.Attribute.Media<'images', true>;
+    body: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
+    dynamicBackground: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    edgePadding: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    showArrowsDesktop: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    showArrowsMobile: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    slideGap: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 80;
+          min: 0;
+        },
+        number
+      >;
+    slides: Schema.Attribute.DynamicZone<
+      ['blocks.image-card', 'blocks.framed-card', 'blocks.info-card']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 9;
+          min: 1;
+        },
+        number
+      >;
+    slidesPerView: Schema.Attribute.Decimal;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
   };
 }
 
-export interface SharedSeo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_seos';
+export interface BlocksCtaButton extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_cta_button';
   info: {
-    name: 'Seo';
-    icon: 'allergies';
-    displayName: 'Seo';
-    description: '';
+    description: 'Top-bordered link button with label and arrow icon';
+    displayName: 'CTA Button';
+    icon: 'arrow-right';
   };
   attributes: {
-    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
-    metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    shareImage: Schema.Attribute.Media<'images'>;
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
   };
 }
 
-export interface SharedRichText extends Struct.ComponentSchema {
-  collectionName: 'components_shared_rich_texts';
+export interface BlocksEntry extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_entry';
   info: {
-    displayName: 'Rich text';
-    icon: 'align-justify';
-    description: '';
+    description: 'Linkable row with image, tag, title \u2014 works for blog posts, articles, options, etc.';
+    displayName: 'Entry';
+    icon: 'newspaper';
   };
   attributes: {
-    body: Schema.Attribute.RichText;
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    tag: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
   };
 }
 
-export interface SharedQuote extends Struct.ComponentSchema {
-  collectionName: 'components_shared_quotes';
+export interface BlocksEntryList extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_entry_list';
   info: {
-    displayName: 'Quote';
-    icon: 'indent';
+    description: 'Section with tagline + heading + optional CTA, rendering a list of linkable image rows';
+    displayName: 'Entry List';
+    icon: 'list';
   };
   attributes: {
-    title: Schema.Attribute.String;
-    body: Schema.Attribute.Text;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    entries: Schema.Attribute.Component<'blocks.entry', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      >;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    linkLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }> &
+      Schema.Attribute.DefaultTo<'Leer m\u00E1s'>;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
   };
 }
 
-export interface SharedMedia extends Struct.ComponentSchema {
-  collectionName: 'components_shared_media';
+export interface BlocksFeatureBanner extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_banner';
   info: {
+    description: 'Side-by-side promo: heading, body, CTA next to a media (image or video). Supports image-left/right and an optional framed style.';
+    displayName: 'Feature Banner';
+    icon: 'rectangle-list';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    framed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'right'>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+  };
+}
+
+export interface BlocksFeatureList extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_list';
+  info: {
+    description: 'Horizontal grid of feature items, each with an icon, title and body';
+    displayName: 'Feature List';
+    icon: 'list-check';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'blocks.feature-list-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 8;
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
+export interface BlocksFeatureListItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_list_item';
+  info: {
+    description: 'Single feature: 60x60 icon, title and body';
+    displayName: 'Feature List Item';
+    icon: 'list-ul';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+  };
+}
+
+export interface BlocksFramedCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_framed_card';
+  info: {
+    description: 'Bordered split card with square media, title, body and top-bordered CTA. Used as a top-level block and as a carousel slide.';
+    displayName: 'Framed Card';
+    icon: 'id-card';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+  };
+}
+
+export interface BlocksHeroBanner extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_hero_banner';
+  info: {
+    description: 'Full-bleed hero with animated title, body copy, CTA, and per-breakpoint background';
+    displayName: 'Hero Banner';
+    icon: 'rocket';
+  };
+  attributes: {
+    animatedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    desktopBackground: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    mobileBackground: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
+export interface BlocksImageCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_image_card';
+  info: {
+    description: 'Card-styled split: media (image or video) on one side, title + body + CTA on the other. Used as a top-level block and as a carousel slide.';
+    displayName: 'Image Card';
+    icon: 'image';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+  };
+}
+
+export interface BlocksInfoCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_info_card';
+  info: {
+    description: 'Vertical card with media at the top and tagline + title + body + top-bordered CTA below. Used as a top-level block and as a carousel slide.';
+    displayName: 'Info Card';
+    icon: 'address-card';
+  };
+  attributes: {
+    align: Schema.Attribute.Enumeration<['left', 'center', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    framed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    imageCover: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
+export interface BlocksIntroSection extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_intro_section';
+  info: {
+    description: 'Centered section with tagline, heading, body and a polymorphic interactive child slot';
+    displayName: 'Intro Section';
+    icon: 'feather';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    children: Schema.Attribute.DynamicZone<
+      ['blocks.cta-button', 'blocks.split-carousel', 'blocks.timeline']
+    > &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 0;
+        },
+        number
+      >;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
+export interface BlocksMedia extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_media';
+  info: {
+    description: 'Image (required) plus an optional autoplay loop video';
     displayName: 'Media';
-    icon: 'file-video';
+    icon: 'picture';
   };
   attributes: {
-    file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    video: Schema.Attribute.Media<'videos'>;
+  };
+}
+
+export interface BlocksSplitCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_split_carousel';
+  info: {
+    description: 'Bordered split row carousel: text + paginator on the left, image on the right. Used standalone or inside intro-section.';
+    displayName: 'Split Carousel';
+    icon: 'images';
+  };
+  attributes: {
+    slides: Schema.Attribute.Component<'blocks.split-carousel-slide', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 9;
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
+export interface BlocksSplitCarouselSlide extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_split_carousel_slide';
+  info: {
+    description: 'Single slide for split-carousel: title, body and image';
+    displayName: 'Split Carousel Slide';
+    icon: 'image';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+  };
+}
+
+export interface BlocksStatItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_stat_item';
+  info: {
+    description: 'Single statistic with animated number, title and description';
+    displayName: 'Stat Item';
+    icon: 'chart-line';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    gradientReverse: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    suffix: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 8;
+      }> &
+      Schema.Attribute.DefaultTo<'+'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    value: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+  };
+}
+
+export interface BlocksStats extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_stats';
+  info: {
+    description: 'Section heading with a row of animated statistics';
+    displayName: 'Stats';
+    icon: 'chart-bar';
+  };
+  attributes: {
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    items: Schema.Attribute.Component<'blocks.stat-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
+export interface BlocksTimeline extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_timeline';
+  info: {
+    description: 'Single timeline row: date label, heading and body on one side, dot-grid noise on the other. Repeat inside intro-section to build a stacked timeline.';
+    displayName: 'Timeline';
+    icon: 'clock';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
+    date: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    heading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    image: Schema.Attribute.Component<'blocks.media', false>;
+    side: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
+  };
+}
+
+export interface BlocksTrustedBy extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_trusted_by';
+  info: {
+    description: 'Heading with gradient highlight and an autoplay marquee of partner logos';
+    displayName: 'Trusted By';
+    icon: 'shield-check';
+  };
+  attributes: {
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    logos: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
+export interface FooterFooterUi extends Struct.ComponentSchema {
+  collectionName: 'components_footer_footer_ui';
+  info: {
+    description: 'Localizable UI strings rendered in the site footer';
+    displayName: 'Footer UI Strings';
+    icon: 'message';
+  };
+  attributes: {
+    copyright: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    disclaimer: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    emailPlaceholder: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    newsletterHeading: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    subscribeLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+  };
+}
+
+export interface FooterLinkColumn extends Struct.ComponentSchema {
+  collectionName: 'components_footer_link_columns';
+  info: {
+    description: 'Column of footer links with optional heading and arrow indicators';
+    displayName: 'Footer Link Column';
+    icon: 'list';
+  };
+  attributes: {
+    heading: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    links: Schema.Attribute.Component<'navigation.link-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 20;
+          min: 1;
+        },
+        number
+      >;
+    showArrows: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface FooterSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_footer_social_links';
+  info: {
+    description: 'External social-media link rendered as an icon button';
+    displayName: 'Footer Social Link';
+    icon: 'thumb-up';
+  };
+  attributes: {
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    platform: Schema.Attribute.Enumeration<['linkedin']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'linkedin'>;
+  };
+}
+
+export interface NavigationHeaderUi extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_header_ui';
+  info: {
+    description: 'Localizable UI strings for the site header';
+    displayName: 'Header UI Strings';
+    icon: 'message';
+  };
+  attributes: {
+    closeLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    menuLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    searchLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    searchPlaceholder: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
+export interface NavigationLinkItem extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_link_items';
+  info: {
+    description: 'Single navigation link with label and href';
+    displayName: 'Link Item';
+    icon: 'link';
+  };
+  attributes: {
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
+export interface NavigationMenuItem extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_menu_items';
+  info: {
+    description: 'Dropdown menu item with submenu entries';
+    displayName: 'Menu Item';
+    icon: 'bars';
+  };
+  attributes: {
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    submenuItems: Schema.Attribute.Component<'navigation.submenu-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
+export interface NavigationSubmenuItem extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_submenu_items';
+  info: {
+    description: 'Child entry inside a dropdown menu';
+    displayName: 'Submenu Item';
+    icon: 'chevron-right';
+  };
+  attributes: {
+    href: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    image: Schema.Attribute.Media<'images'>;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
   };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'shared.slider': SharedSlider;
-      'shared.seo': SharedSeo;
-      'shared.rich-text': SharedRichText;
-      'shared.quote': SharedQuote;
-      'shared.media': SharedMedia;
+      'blocks.carousel': BlocksCarousel;
+      'blocks.cta-button': BlocksCtaButton;
+      'blocks.entry': BlocksEntry;
+      'blocks.entry-list': BlocksEntryList;
+      'blocks.feature-banner': BlocksFeatureBanner;
+      'blocks.feature-list': BlocksFeatureList;
+      'blocks.feature-list-item': BlocksFeatureListItem;
+      'blocks.framed-card': BlocksFramedCard;
+      'blocks.hero-banner': BlocksHeroBanner;
+      'blocks.image-card': BlocksImageCard;
+      'blocks.info-card': BlocksInfoCard;
+      'blocks.intro-section': BlocksIntroSection;
+      'blocks.media': BlocksMedia;
+      'blocks.split-carousel': BlocksSplitCarousel;
+      'blocks.split-carousel-slide': BlocksSplitCarouselSlide;
+      'blocks.stat-item': BlocksStatItem;
+      'blocks.stats': BlocksStats;
+      'blocks.timeline': BlocksTimeline;
+      'blocks.trusted-by': BlocksTrustedBy;
+      'footer.footer-ui': FooterFooterUi;
+      'footer.link-column': FooterLinkColumn;
+      'footer.social-link': FooterSocialLink;
+      'navigation.header-ui': NavigationHeaderUi;
+      'navigation.link-item': NavigationLinkItem;
+      'navigation.menu-item': NavigationMenuItem;
+      'navigation.submenu-item': NavigationSubmenuItem;
     }
   }
 }
