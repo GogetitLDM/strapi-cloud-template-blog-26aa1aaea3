@@ -184,6 +184,31 @@ export interface BlocksFeatureBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFeatureImageList extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_image_list';
+  info: {
+    description: 'Bordered split: vertical feature list (icon + title + body) with image on the side.';
+    displayName: 'Feature Image List';
+    icon: 'list-check';
+  };
+  attributes: {
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'right'>;
+    items: Schema.Attribute.Component<'blocks.feature-list-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksFeatureList extends Struct.ComponentSchema {
   collectionName: 'components_blocks_feature_list';
   info: {
@@ -778,6 +803,7 @@ declare module '@strapi/strapi' {
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
       'blocks.feature-banner': BlocksFeatureBanner;
+      'blocks.feature-image-list': BlocksFeatureImageList;
       'blocks.feature-list': BlocksFeatureList;
       'blocks.feature-list-item': BlocksFeatureListItem;
       'blocks.framed-card': BlocksFramedCard;

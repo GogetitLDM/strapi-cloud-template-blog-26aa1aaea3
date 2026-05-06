@@ -58,6 +58,7 @@
         "blocks.entry-list",
         "blocks.feature-banner",
         "blocks.feature-list",
+        "blocks.feature-image-list",
         "blocks.intro-section",
         "blocks.split-carousel"
       ]

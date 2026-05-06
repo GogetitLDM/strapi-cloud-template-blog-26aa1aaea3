@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_blocks_feature_image_list",
+  "info": {
+    "displayName": "Feature Image List",
+    "icon": "list-check",
+    "description": "Bordered split: vertical feature list (icon + title + body) with image on the side."
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.feature-list-item",
+      "required": true,
+      "min": 1,
+      "max": 5
+    },
+    "media": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "imagePosition": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "right",
+      "required": true
+    }
+  }
+}
