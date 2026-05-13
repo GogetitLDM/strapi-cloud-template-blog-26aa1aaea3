@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_blocks_cta_banner",
+  "info": {
+    "displayName": "CTA Banner",
+    "icon": "bullhorn",
+    "description": "Centered call-to-action: title, body, and a polymorphic children slot (CTA buttons today; more later)."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 200
+    },
+    "body": {
+      "type": "text",
+      "required": false,
+      "maxLength": 400
+    },
+    "children": {
+      "type": "dynamiczone",
+      "components": ["blocks.cta-button", "blocks.newsletter"],
+      "required": false,
+      "min": 0,
+      "max": 4
+    }
+  }
+}

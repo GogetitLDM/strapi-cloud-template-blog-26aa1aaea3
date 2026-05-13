@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_blocks_newsletter",
+  "info": {
+    "displayName": "Newsletter",
+    "icon": "envelope",
+    "description": "Inline newsletter signup: email input, submit button, and a small disclaimer line."
+  },
+  "options": {},
+  "attributes": {
+    "emailPlaceholder": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "subscribeLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60
+    },
+    "disclaimer": {
+      "type": "text",
+      "required": true,
+      "maxLength": 240
+    }
+  }
+}

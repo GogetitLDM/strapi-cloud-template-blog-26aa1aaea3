@@ -55,6 +55,40 @@ export interface BlocksCarousel extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksCtaBanner extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_cta_banner';
+  info: {
+    description: 'Centered call-to-action: title, body, and a polymorphic children slot (CTA buttons today; more later).';
+    displayName: 'CTA Banner';
+    icon: 'bullhorn';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
+    children: Schema.Attribute.DynamicZone<
+      ['blocks.cta-button', 'blocks.newsletter']
+    > &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 4;
+          min: 0;
+        },
+        number
+      >;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
 export interface BlocksCtaButton extends Struct.ComponentSchema {
   collectionName: 'components_blocks_cta_button';
   info: {
@@ -554,6 +588,32 @@ export interface BlocksMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksNewsletter extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_newsletter';
+  info: {
+    description: 'Inline newsletter signup: email input, submit button, and a small disclaimer line.';
+    displayName: 'Newsletter';
+    icon: 'envelope';
+  };
+  attributes: {
+    disclaimer: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    emailPlaceholder: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+    subscribeLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+  };
+}
+
 export interface BlocksSplitCarousel extends Struct.ComponentSchema {
   collectionName: 'components_blocks_split_carousel';
   info: {
@@ -954,6 +1014,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'blocks.carousel': BlocksCarousel;
+      'blocks.cta-banner': BlocksCtaBanner;
       'blocks.cta-button': BlocksCtaButton;
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
@@ -971,6 +1032,7 @@ declare module '@strapi/strapi' {
       'blocks.info-card': BlocksInfoCard;
       'blocks.intro-section': BlocksIntroSection;
       'blocks.media': BlocksMedia;
+      'blocks.newsletter': BlocksNewsletter;
       'blocks.split-carousel': BlocksSplitCarousel;
       'blocks.split-carousel-slide': BlocksSplitCarouselSlide;
       'blocks.stat-item': BlocksStatItem;
