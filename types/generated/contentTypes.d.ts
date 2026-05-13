@@ -594,8 +594,10 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.entry-list',
         'blocks.feature-banner',
         'blocks.feature-list',
+        'blocks.feature-image-list',
         'blocks.intro-section',
         'blocks.split-carousel',
+        'blocks.sticky-feature-list',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{

@@ -184,6 +184,29 @@ export interface BlocksFeatureBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFeatureImageCard extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_image_card';
+  info: {
+    description: 'Image on top + gradient H5 title + body. Used inside Sticky Feature List.';
+    displayName: 'Feature Image Card';
+    icon: 'image';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 400;
+      }>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
 export interface BlocksFeatureImageList extends Struct.ComponentSchema {
   collectionName: 'components_blocks_feature_image_list';
   info: {
@@ -558,6 +581,58 @@ export interface BlocksStats extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksStickyFeatureList extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_sticky_feature_list';
+  info: {
+    description: 'Two-column section: left sticky heading + CTA, right scrolling list of cards.';
+    displayName: 'Sticky Feature List';
+    icon: 'anchor';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    items: Schema.Attribute.DynamicZone<
+      [
+        'blocks.feature-image-card',
+        'blocks.info-card',
+        'blocks.framed-card',
+        'blocks.image-card',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 8;
+          min: 1;
+        },
+        number
+      >;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
 export interface BlocksTimeline extends Struct.ComponentSchema {
   collectionName: 'components_blocks_timeline';
   info: {
@@ -803,6 +878,7 @@ declare module '@strapi/strapi' {
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
       'blocks.feature-banner': BlocksFeatureBanner;
+      'blocks.feature-image-card': BlocksFeatureImageCard;
       'blocks.feature-image-list': BlocksFeatureImageList;
       'blocks.feature-list': BlocksFeatureList;
       'blocks.feature-list-item': BlocksFeatureListItem;
@@ -816,6 +892,7 @@ declare module '@strapi/strapi' {
       'blocks.split-carousel-slide': BlocksSplitCarouselSlide;
       'blocks.stat-item': BlocksStatItem;
       'blocks.stats': BlocksStats;
+      'blocks.sticky-feature-list': BlocksStickyFeatureList;
       'blocks.timeline': BlocksTimeline;
       'blocks.trusted-by': BlocksTrustedBy;
       'footer.footer-ui': FooterFooterUi;

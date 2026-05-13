@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_blocks_sticky_feature_list",
+  "info": {
+    "displayName": "Sticky Feature List",
+    "icon": "anchor",
+    "description": "Two-column section: left sticky heading + CTA, right scrolling list of cards."
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 200
+    },
+    "body": {
+      "type": "text",
+      "required": false,
+      "maxLength": 600
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": false,
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "items": {
+      "type": "dynamiczone",
+      "components": [
+        "blocks.feature-image-card",
+        "blocks.info-card",
+        "blocks.framed-card",
+        "blocks.image-card"
+      ],
+      "required": true,
+      "min": 1,
+      "max": 8
+    }
+  }
+}

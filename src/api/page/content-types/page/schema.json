@@ -60,7 +60,8 @@
         "blocks.feature-list",
         "blocks.feature-image-list",
         "blocks.intro-section",
-        "blocks.split-carousel"
+        "blocks.split-carousel",
+        "blocks.sticky-feature-list"
       ]
     }
   }

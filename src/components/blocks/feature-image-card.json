@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_blocks_feature_image_card",
+  "info": {
+    "displayName": "Feature Image Card",
+    "icon": "image",
+    "description": "Image on top + gradient H5 title + body. Used inside Sticky Feature List."
+  },
+  "options": {},
+  "attributes": {
+    "media": {
+      "type": "component",
+      "repeatable": false,
+      "component": "blocks.media",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "body": {
+      "type": "text",
+      "required": true,
+      "maxLength": 400
+    }
+  }
+}
