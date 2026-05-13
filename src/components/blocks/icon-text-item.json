@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_blocks_icon_text_item",
+  "info": {
+    "displayName": "Icon Text Item",
+    "icon": "bolt",
+    "description": "Small icon in a bordered gradient box + single line of text. Used in highlight rows."
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "text": {
+      "type": "text",
+      "required": true,
+      "maxLength": 200
+    }
+  }
+}

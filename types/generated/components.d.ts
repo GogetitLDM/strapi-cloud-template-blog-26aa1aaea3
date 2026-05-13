@@ -184,6 +184,49 @@ export interface BlocksFeatureBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFeatureHighlights extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_highlights';
+  info: {
+    description: 'Split tagline+title+body+image with a bordered horizontal row of icon-text highlights below.';
+    displayName: 'Feature Highlights';
+    icon: 'star';
+  };
+  attributes: {
+    body: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 600;
+      }>;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    highlights: Schema.Attribute.Component<'blocks.icon-text-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 4;
+          min: 1;
+        },
+        number
+      >;
+    imagePosition: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'right'>;
+    media: Schema.Attribute.Component<'blocks.media', false> &
+      Schema.Attribute.Required;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
 export interface BlocksFeatureImageCard extends Struct.ComponentSchema {
   collectionName: 'components_blocks_feature_image_card';
   info: {
@@ -338,6 +381,23 @@ export interface BlocksHeroBanner extends Struct.ComponentSchema {
     mobileBackground: Schema.Attribute.Component<'blocks.media', false> &
       Schema.Attribute.Required;
     title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+  };
+}
+
+export interface BlocksIconTextItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_icon_text_item';
+  info: {
+    description: 'Small icon in a bordered gradient box + single line of text. Used in highlight rows.';
+    displayName: 'Icon Text Item';
+    icon: 'bolt';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    text: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
@@ -878,12 +938,14 @@ declare module '@strapi/strapi' {
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
       'blocks.feature-banner': BlocksFeatureBanner;
+      'blocks.feature-highlights': BlocksFeatureHighlights;
       'blocks.feature-image-card': BlocksFeatureImageCard;
       'blocks.feature-image-list': BlocksFeatureImageList;
       'blocks.feature-list': BlocksFeatureList;
       'blocks.feature-list-item': BlocksFeatureListItem;
       'blocks.framed-card': BlocksFramedCard;
       'blocks.hero-banner': BlocksHeroBanner;
+      'blocks.icon-text-item': BlocksIconTextItem;
       'blocks.image-card': BlocksImageCard;
       'blocks.info-card': BlocksInfoCard;
       'blocks.intro-section': BlocksIntroSection;
