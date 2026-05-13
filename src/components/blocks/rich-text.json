@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocks_rich_text",
+  "info": {
+    "displayName": "Rich Text",
+    "icon": "align-justify",
+    "description": "Long-form prose. Powered by Strapi v5's Blocks editor."
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}
