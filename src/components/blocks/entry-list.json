@@ -3,7 +3,7 @@
   "info": {
     "displayName": "Entry List",
     "icon": "list",
-    "description": "Section with tagline + heading + optional CTA, rendering a list of linkable image rows"
+    "description": "Section with tagline + heading + optional CTA, rendering a list of articles auto-fetched from the article collection"
   },
   "options": {},
   "attributes": {
@@ -38,13 +38,28 @@
       "maxLength": 60,
       "default": "Leer más"
     },
-    "entries": {
-      "type": "component",
-      "repeatable": true,
-      "component": "blocks.entry",
+    "limit": {
+      "type": "integer",
       "required": true,
       "min": 1,
-      "max": 12
+      "max": 12,
+      "default": 6
+    },
+    "sort": {
+      "type": "enumeration",
+      "required": true,
+      "enum": ["publishedAt:desc", "publishedAt:asc", "title:asc", "title:desc"],
+      "default": "publishedAt:desc"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tag.tag"
     }
   }
 }
