@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_blocks_feature_grid",
+  "info": {
+    "displayName": "Feature Grid",
+    "icon": "grid",
+    "description": "Up-to-4-column grid of icon + title + body items, on a royal-blue gradient section background."
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blocks.feature-list-item",
+      "required": true,
+      "min": 1,
+      "max": 8
+    }
+  }
+}

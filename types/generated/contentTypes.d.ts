@@ -594,6 +594,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.entry-list',
         'blocks.feature-banner',
         'blocks.feature-list',
+        'blocks.feature-grid',
         'blocks.feature-image-list',
         'blocks.feature-highlights',
         'blocks.intro-section',

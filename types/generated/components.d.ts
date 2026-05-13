@@ -184,6 +184,26 @@ export interface BlocksFeatureBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksFeatureGrid extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_feature_grid';
+  info: {
+    description: 'Up-to-4-column grid of icon + title + body items, on a royal-blue gradient section background.';
+    displayName: 'Feature Grid';
+    icon: 'grid';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'blocks.feature-list-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 8;
+          min: 1;
+        },
+        number
+      >;
+  };
+}
+
 export interface BlocksFeatureHighlights extends Struct.ComponentSchema {
   collectionName: 'components_blocks_feature_highlights';
   info: {
@@ -938,6 +958,7 @@ declare module '@strapi/strapi' {
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
       'blocks.feature-banner': BlocksFeatureBanner;
+      'blocks.feature-grid': BlocksFeatureGrid;
       'blocks.feature-highlights': BlocksFeatureHighlights;
       'blocks.feature-image-card': BlocksFeatureImageCard;
       'blocks.feature-image-list': BlocksFeatureImageList;
