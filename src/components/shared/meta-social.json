@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_meta_social",
+  "info": {
+    "displayName": "Meta Social",
+    "icon": "share-nodes",
+    "description": "Per-network social meta overrides (og:image, twitter:title, etc.)."
+  },
+  "options": {},
+  "attributes": {
+    "socialNetwork": {
+      "type": "enumeration",
+      "enum": ["Facebook", "Twitter", "LinkedIn", "Instagram"],
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 160
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}
