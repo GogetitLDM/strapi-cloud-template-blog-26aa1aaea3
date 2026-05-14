@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_blocks_locations_map",
+  "info": {
+    "displayName": "Locations Map",
+    "icon": "map",
+    "description": "Heading + list of locations on the left and an embedded Google Map on the right that recenters when the selected location changes."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120,
+      "default": "Ubicaciones"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "locations": {
+      "type": "component",
+      "component": "blocks.location-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1,
+      "max": 12
+    }
+  }
+}

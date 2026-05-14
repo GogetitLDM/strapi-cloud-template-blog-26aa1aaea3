@@ -847,6 +847,85 @@ export interface BlocksIntroSection extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksLocationItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_location_item';
+  info: {
+    description: 'A single location with name, address and map coordinates (latitude / longitude / zoom). Used by the Locations Map block.';
+    displayName: 'Location Item';
+    icon: 'pin';
+  };
+  attributes: {
+    address: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    latitude: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 90;
+          min: -90;
+        },
+        number
+      >;
+    longitude: Schema.Attribute.Decimal &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 180;
+          min: -180;
+        },
+        number
+      >;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    zoom: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 20;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<14>;
+  };
+}
+
+export interface BlocksLocationsMap extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_locations_map';
+  info: {
+    description: 'Heading + list of locations on the left and an embedded Google Map on the right that recenters when the selected location changes.';
+    displayName: 'Locations Map';
+    icon: 'map';
+  };
+  attributes: {
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    locations: Schema.Attribute.Component<'blocks.location-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 12;
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }> &
+      Schema.Attribute.DefaultTo<'Ubicaciones'>;
+  };
+}
+
 export interface BlocksMedia extends Struct.ComponentSchema {
   collectionName: 'components_blocks_media';
   info: {
@@ -1386,6 +1465,8 @@ declare module '@strapi/strapi' {
       'blocks.image-card': BlocksImageCard;
       'blocks.info-card': BlocksInfoCard;
       'blocks.intro-section': BlocksIntroSection;
+      'blocks.location-item': BlocksLocationItem;
+      'blocks.locations-map': BlocksLocationsMap;
       'blocks.media': BlocksMedia;
       'blocks.newsletter': BlocksNewsletter;
       'blocks.rich-text': BlocksRichText;

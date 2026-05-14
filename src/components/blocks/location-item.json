@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_blocks_location_item",
+  "info": {
+    "displayName": "Location Item",
+    "icon": "pin",
+    "description": "A single location with name, address and map coordinates (latitude / longitude / zoom). Used by the Locations Map block."
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 80
+    },
+    "address": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "latitude": {
+      "type": "decimal",
+      "required": true,
+      "min": -90,
+      "max": 90
+    },
+    "longitude": {
+      "type": "decimal",
+      "required": true,
+      "min": -180,
+      "max": 180
+    },
+    "zoom": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 20,
+      "default": 14
+    }
+  }
+}

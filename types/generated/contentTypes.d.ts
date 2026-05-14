@@ -771,6 +771,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.blog-grid',
         'blocks.download-list',
         'blocks.contact-form',
+        'blocks.locations-map',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{

@@ -67,7 +67,8 @@
         "blocks.sticky-feature-list",
         "blocks.blog-grid",
         "blocks.download-list",
-        "blocks.contact-form"
+        "blocks.contact-form",
+        "blocks.locations-map"
       ]
     }
   }
