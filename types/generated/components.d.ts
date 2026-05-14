@@ -140,11 +140,12 @@ export interface BlocksEntry extends Struct.ComponentSchema {
 export interface BlocksEntryList extends Struct.ComponentSchema {
   collectionName: 'components_blocks_entry_list';
   info: {
-    description: 'Section with tagline + heading + optional CTA, rendering a list of linkable image rows';
+    description: 'Section with tagline + heading + optional CTA, rendering a list of articles auto-fetched from the article collection';
     displayName: 'Entry List';
     icon: 'list';
   };
   attributes: {
+    category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     ctaHref: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 500;
@@ -153,7 +154,11 @@ export interface BlocksEntryList extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
-    entries: Schema.Attribute.Component<'blocks.entry', true> &
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    limit: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -161,16 +166,19 @@ export interface BlocksEntryList extends Struct.ComponentSchema {
           min: 1;
         },
         number
-      >;
-    highlightedTitle: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
+      > &
+      Schema.Attribute.DefaultTo<6>;
     linkLabel: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }> &
       Schema.Attribute.DefaultTo<'Leer m\u00E1s'>;
+    sort: Schema.Attribute.Enumeration<
+      ['publishedAt:desc', 'publishedAt:asc', 'title:asc', 'title:desc']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'publishedAt:desc'>;
+    tag: Schema.Attribute.Relation<'oneToOne', 'api::tag.tag'>;
     tagline: Schema.Attribute.String &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
@@ -614,6 +622,18 @@ export interface BlocksNewsletter extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksRichText extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_rich_text';
+  info: {
+    description: "Long-form prose. Powered by Strapi v5's Blocks editor.";
+    displayName: 'Rich Text';
+    icon: 'align-justify';
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
+  };
+}
+
 export interface BlocksSplitCarousel extends Struct.ComponentSchema {
   collectionName: 'components_blocks_split_carousel';
   info: {
@@ -1010,6 +1030,72 @@ export interface NavigationSubmenuItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedMetaSocial extends Struct.ComponentSchema {
+  collectionName: 'components_shared_meta_social';
+  info: {
+    description: 'Per-network social meta overrides (og:image, twitter:title, etc.).';
+    displayName: 'Meta Social';
+    icon: 'share-nodes';
+  };
+  attributes: {
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    image: Schema.Attribute.Media<'images'>;
+    socialNetwork: Schema.Attribute.Enumeration<
+      ['Facebook', 'Twitter', 'LinkedIn', 'Instagram']
+    > &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+  };
+}
+
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seo';
+  info: {
+    description: 'SEO meta for a page or article. Per-locale.';
+    displayName: 'SEO';
+    icon: 'search';
+  };
+  attributes: {
+    canonicalURL: Schema.Attribute.String;
+    keywords: Schema.Attribute.Text;
+    metaDescription: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    metaRobots: Schema.Attribute.String;
+    metaSocial: Schema.Attribute.Component<'shared.meta-social', true>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    shareImage: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface SharedSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_shared_social_link';
+  info: {
+    description: 'Single social-network link with platform and URL.';
+    displayName: 'Social Link';
+    icon: 'link';
+  };
+  attributes: {
+    platform: Schema.Attribute.Enumeration<
+      ['Twitter', 'LinkedIn', 'GitHub', 'YouTube', 'Instagram']
+    > &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -1033,6 +1119,7 @@ declare module '@strapi/strapi' {
       'blocks.intro-section': BlocksIntroSection;
       'blocks.media': BlocksMedia;
       'blocks.newsletter': BlocksNewsletter;
+      'blocks.rich-text': BlocksRichText;
       'blocks.split-carousel': BlocksSplitCarousel;
       'blocks.split-carousel-slide': BlocksSplitCarouselSlide;
       'blocks.stat-item': BlocksStatItem;
@@ -1047,6 +1134,9 @@ declare module '@strapi/strapi' {
       'navigation.link-item': NavigationLinkItem;
       'navigation.menu-item': NavigationMenuItem;
       'navigation.submenu-item': NavigationSubmenuItem;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.seo': SharedSeo;
+      'shared.social-link': SharedSocialLink;
     }
   }
 }
