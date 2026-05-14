@@ -770,6 +770,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.sticky-feature-list',
         'blocks.blog-grid',
         'blocks.download-list',
+        'blocks.contact-form',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{

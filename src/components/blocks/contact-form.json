@@ -1,0 +1,118 @@
+{
+  "collectionName": "components_blocks_contact_form",
+  "info": {
+    "displayName": "Contact Form",
+    "icon": "envelop",
+    "description": "Contact form with first/last name, email, phone, project type select, role radios, requirements textarea, terms checkbox and gradient submit button. Submissions POST to the optional submitUrl as JSON."
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 300
+    },
+    "firstNameLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Nombre completo"
+    },
+    "lastNameLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Apellido"
+    },
+    "emailLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Correo electrónico"
+    },
+    "phoneLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Teléfono de contacto"
+    },
+    "projectTypeLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Tipo de proyecto"
+    },
+    "projectTypePlaceholder": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60,
+      "default": "Seleccione una opción"
+    },
+    "projectTypeOptions": {
+      "type": "component",
+      "component": "blocks.form-option",
+      "repeatable": true,
+      "required": true,
+      "min": 1,
+      "max": 20
+    },
+    "roleLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 60,
+      "default": "¿Cuál es su rol?"
+    },
+    "roleOptions": {
+      "type": "component",
+      "component": "blocks.form-option",
+      "repeatable": true,
+      "required": true,
+      "min": 1,
+      "max": 20
+    },
+    "requirementsLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Requerimientos"
+    },
+    "requirementsPlaceholder": {
+      "type": "string",
+      "maxLength": 120,
+      "default": "Cuéntenos sus necesidades"
+    },
+    "acceptTermsLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "default": "Acepto los términos legales"
+    },
+    "submitLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "default": "Enviar"
+    },
+    "successMessage": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "default": "Gracias, hemos recibido su solicitud."
+    },
+    "errorMessage": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200,
+      "default": "Hubo un error al enviar. Por favor intente de nuevo."
+    },
+    "submitUrl": {
+      "type": "string",
+      "maxLength": 500,
+      "regex": "^https?://"
+    }
+  }
+}

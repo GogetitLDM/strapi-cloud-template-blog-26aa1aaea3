@@ -98,6 +98,125 @@ export interface BlocksCarousel extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksContactForm extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_contact_form';
+  info: {
+    description: 'Contact form with first/last name, email, phone, project type select, role radios, requirements textarea, terms checkbox and gradient submit button. Submissions POST to the optional submitUrl as JSON.';
+    displayName: 'Contact Form';
+    icon: 'envelop';
+  };
+  attributes: {
+    acceptTermsLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }> &
+      Schema.Attribute.DefaultTo<'Acepto los t\u00E9rminos legales'>;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 300;
+      }>;
+    emailLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Correo electr\u00F3nico'>;
+    errorMessage: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }> &
+      Schema.Attribute.DefaultTo<'Hubo un error al enviar. Por favor intente de nuevo.'>;
+    firstNameLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Nombre completo'>;
+    lastNameLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Apellido'>;
+    phoneLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Tel\u00E9fono de contacto'>;
+    projectTypeLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Tipo de proyecto'>;
+    projectTypeOptions: Schema.Attribute.Component<'blocks.form-option', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 20;
+          min: 1;
+        },
+        number
+      >;
+    projectTypePlaceholder: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }> &
+      Schema.Attribute.DefaultTo<'Seleccione una opci\u00F3n'>;
+    requirementsLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }> &
+      Schema.Attribute.DefaultTo<'Requerimientos'>;
+    requirementsPlaceholder: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }> &
+      Schema.Attribute.DefaultTo<'Cu\u00E9ntenos sus necesidades'>;
+    roleLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }> &
+      Schema.Attribute.DefaultTo<'\u00BFCu\u00E1l es su rol?'>;
+    roleOptions: Schema.Attribute.Component<'blocks.form-option', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 20;
+          min: 1;
+        },
+        number
+      >;
+    submitLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }> &
+      Schema.Attribute.DefaultTo<'Enviar'>;
+    submitUrl: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    successMessage: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }> &
+      Schema.Attribute.DefaultTo<'Gracias, hemos recibido su solicitud.'>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
 export interface BlocksCtaBanner extends Struct.ComponentSchema {
   collectionName: 'components_blocks_cta_banner';
   info: {
@@ -499,6 +618,27 @@ export interface BlocksFeatureListItem extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
+      }>;
+  };
+}
+
+export interface BlocksFormOption extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_form_option';
+  info: {
+    description: 'Single option for a select or radio group';
+    displayName: 'Form Option';
+    icon: 'bulletList';
+  };
+  attributes: {
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    value: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
       }>;
   };
 }
@@ -1225,6 +1365,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'blocks.blog-grid': BlocksBlogGrid;
       'blocks.carousel': BlocksCarousel;
+      'blocks.contact-form': BlocksContactForm;
       'blocks.cta-banner': BlocksCtaBanner;
       'blocks.cta-button': BlocksCtaButton;
       'blocks.download-item': BlocksDownloadItem;
@@ -1238,6 +1379,7 @@ declare module '@strapi/strapi' {
       'blocks.feature-image-list': BlocksFeatureImageList;
       'blocks.feature-list': BlocksFeatureList;
       'blocks.feature-list-item': BlocksFeatureListItem;
+      'blocks.form-option': BlocksFormOption;
       'blocks.framed-card': BlocksFramedCard;
       'blocks.hero-banner': BlocksHeroBanner;
       'blocks.icon-text-item': BlocksIconTextItem;

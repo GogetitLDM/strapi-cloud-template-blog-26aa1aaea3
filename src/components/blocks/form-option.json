@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_blocks_form_option",
+  "info": {
+    "displayName": "Form Option",
+    "icon": "bulletList",
+    "description": "Single option for a select or radio group"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    }
+  }
+}
