@@ -64,7 +64,8 @@
         "blocks.cta-banner",
         "blocks.intro-section",
         "blocks.split-carousel",
-        "blocks.sticky-feature-list"
+        "blocks.sticky-feature-list",
+        "blocks.blog-grid"
       ]
     }
   }

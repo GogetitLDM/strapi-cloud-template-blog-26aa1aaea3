@@ -1,5 +1,48 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlocksBlogGrid extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_blog_grid';
+  info: {
+    description: "Tabbed 3-column grid of articles. Editor picks the categories that appear as tabs; an initial 'view all' tab shows the latest articles across all categories.";
+    displayName: 'Blog Grid';
+    icon: 'grid';
+  };
+  attributes: {
+    categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    >;
+    limit: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 24;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<6>;
+    readingTimeSuffix: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }> &
+      Schema.Attribute.DefaultTo<'minutos'>;
+    readMoreLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }> &
+      Schema.Attribute.DefaultTo<'Leer m\u00E1s'>;
+    viewAllLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }> &
+      Schema.Attribute.DefaultTo<'Ver todo'>;
+  };
+}
+
 export interface BlocksCarousel extends Struct.ComponentSchema {
   collectionName: 'components_blocks_carousel';
   info: {
@@ -1099,6 +1142,7 @@ export interface SharedSocialLink extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'blocks.blog-grid': BlocksBlogGrid;
       'blocks.carousel': BlocksCarousel;
       'blocks.cta-banner': BlocksCtaBanner;
       'blocks.cta-button': BlocksCtaButton;

@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_blocks_blog_grid",
+  "info": {
+    "displayName": "Blog Grid",
+    "icon": "grid",
+    "description": "Tabbed 3-column grid of articles. Editor picks the categories that appear as tabs; an initial 'view all' tab shows the latest articles across all categories."
+  },
+  "options": {},
+  "attributes": {
+    "viewAllLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "default": "Ver todo"
+    },
+    "readMoreLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "default": "Leer más"
+    },
+    "readingTimeSuffix": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "default": "minutos"
+    },
+    "limit": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 24,
+      "default": 6
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    }
+  }
+}

@@ -768,6 +768,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'blocks.intro-section',
         'blocks.split-carousel',
         'blocks.sticky-feature-list',
+        'blocks.blog-grid',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
