@@ -65,7 +65,8 @@
         "blocks.intro-section",
         "blocks.split-carousel",
         "blocks.sticky-feature-list",
-        "blocks.blog-grid"
+        "blocks.blog-grid",
+        "blocks.download-list"
       ]
     }
   }

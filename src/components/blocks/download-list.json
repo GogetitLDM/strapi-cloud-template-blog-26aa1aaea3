@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_blocks_download_list",
+  "info": {
+    "displayName": "Download List",
+    "icon": "download",
+    "description": "Section with tagline + heading + optional CTA, rendering a list of downloadable resources. Files are linked by external URL."
+  },
+  "options": {},
+  "attributes": {
+    "tagline": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "highlightedTitle": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "ctaLabel": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "ctaHref": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "downloadLabel": {
+      "type": "string",
+      "required": true,
+      "maxLength": 30,
+      "default": "Descargar"
+    },
+    "items": {
+      "type": "component",
+      "component": "blocks.download-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1,
+      "max": 24
+    }
+  }
+}

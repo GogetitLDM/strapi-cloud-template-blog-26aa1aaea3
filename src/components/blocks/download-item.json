@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_blocks_download_item",
+  "info": {
+    "displayName": "Download Item",
+    "icon": "file",
+    "description": "One downloadable resource. The file itself is NOT uploaded to Strapi — the editor pastes an external URL."
+  },
+  "options": {},
+  "attributes": {
+    "tag": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "meta": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 160
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "downloadUrl": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "regex": "^https?://"
+    }
+  }
+}

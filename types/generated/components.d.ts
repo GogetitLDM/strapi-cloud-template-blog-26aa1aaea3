@@ -153,6 +153,87 @@ export interface BlocksCtaButton extends Struct.ComponentSchema {
   };
 }
 
+export interface BlocksDownloadItem extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_download_item';
+  info: {
+    description: 'One downloadable resource. The file itself is NOT uploaded to Strapi \u2014 the editor pastes an external URL.';
+    displayName: 'Download Item';
+    icon: 'file';
+  };
+  attributes: {
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 240;
+      }>;
+    downloadUrl: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    meta: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    tag: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+  };
+}
+
+export interface BlocksDownloadList extends Struct.ComponentSchema {
+  collectionName: 'components_blocks_download_list';
+  info: {
+    description: 'Section with tagline + heading + optional CTA, rendering a list of downloadable resources. Files are linked by external URL.';
+    displayName: 'Download List';
+    icon: 'download';
+  };
+  attributes: {
+    ctaHref: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 500;
+      }>;
+    ctaLabel: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    downloadLabel: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }> &
+      Schema.Attribute.DefaultTo<'Descargar'>;
+    highlightedTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 80;
+      }>;
+    items: Schema.Attribute.Component<'blocks.download-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 24;
+          min: 1;
+        },
+        number
+      >;
+    tagline: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 120;
+      }>;
+  };
+}
+
 export interface BlocksEntry extends Struct.ComponentSchema {
   collectionName: 'components_blocks_entry';
   info: {
@@ -1146,6 +1227,8 @@ declare module '@strapi/strapi' {
       'blocks.carousel': BlocksCarousel;
       'blocks.cta-banner': BlocksCtaBanner;
       'blocks.cta-button': BlocksCtaButton;
+      'blocks.download-item': BlocksDownloadItem;
+      'blocks.download-list': BlocksDownloadList;
       'blocks.entry': BlocksEntry;
       'blocks.entry-list': BlocksEntryList;
       'blocks.feature-banner': BlocksFeatureBanner;
