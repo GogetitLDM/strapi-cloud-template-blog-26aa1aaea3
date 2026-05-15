@@ -57,6 +57,12 @@
       "required": false,
       "default": false
     },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
     "slides": {
       "type": "dynamiczone",
       "components": [
